@@ -7,7 +7,7 @@ export const getWishList = async () => {
     });
 
     if (!res) {
-      throw new Error("failed to fetch");
+      console.log(res);
     }
     return res.json();
   } catch (e) {

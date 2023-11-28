@@ -17,17 +17,16 @@ const AddItemPage = () => {
     try {
       const res = await fetch("http://localhost:3000/api/wants", {
         method: "POST",
+        cache: "no-store",
         body: JSON.stringify({
           name,
           notes,
         }),
       });
 
-      if (!res.ok) {
-        alert("something went wrong");
+      if (res.ok) {
+        router.push("/");
       }
-
-      router.push("/");
     } catch (e) {
       console.log(e);
     }

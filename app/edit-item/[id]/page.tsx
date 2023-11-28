@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { redirect } from "next/navigation";
 
 const EditItemPage = ({ params }: any) => {
   const [name, setName] = useState("");
@@ -27,21 +28,19 @@ const EditItemPage = ({ params }: any) => {
 
   // need to add star interface
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
     try {
       const res = await fetch(`http://localhost:3000/api/wants/${params.id}`, {
         method: "PUT",
+        cache: "no-store",
         body: JSON.stringify({ name, notes }),
       });
-      if (!res.ok) {
-        alert("something went wrong");
-        throw new Error("something went wrong");
-      } else {
+      if (res.ok) {
         router.push("/");
       }
     } catch (e) {
       console.log(e);
-      throw new Error("something went wrong");
     }
   };
 
