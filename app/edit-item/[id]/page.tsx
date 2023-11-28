@@ -1,28 +1,71 @@
-const getWishListItem = async (id: string) => {
-  const item = await fetch(`http://localhost:3000/api/wants/${id}`);
-  return await item.json();
-};
+"use client";
 
-const EditItemPage = async ({ params }: any) => {
-  const { want } = await getWishListItem(params.id);
-  console.log(want);
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+
+const EditItemPage = ({ params }: any) => {
+  const [name, setName] = useState("");
+  const [notes, setNotes] = useState("");
+  const [data, setData] = useState(null);
+  const [isLoading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch(`http://localhost:3000/api/wants/${params.id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data.want);
+        setName(data.want.name);
+        setNotes(data.want.notes);
+        setLoading(false);
+      });
+  }, []);
+
+  if (isLoading) return <p>Loading...</p>;
+  if (!data) return <p>No profile data</p>;
+
+  const router = useRouter();
+
   // need to add star interface
+
+  const handleSubmit = async () => {
+    try {
+      const res = await fetch(`http://localhost:3000/api/wants/${params.id}`, {
+        method: "PUT",
+        body: JSON.stringify({ name, notes }),
+      });
+      if (!res.ok) {
+        alert("something went wrong");
+        throw new Error("something went wrong");
+      } else {
+        router.push("/");
+      }
+    } catch (e) {
+      console.log(e);
+      throw new Error("something went wrong");
+    }
+  };
+
   return (
-    <main className="flex flex-col gap-4 my-4">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4 my-4">
       <input
         placeholder="Name"
         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
-        value={want.name}
+        value={name}
+        onChange={(e) => setName(e.target.value)}
       />
       <textarea
         placeholder="Links and descriptions"
         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
-        value={want.notes}
+        value={notes}
+        onChange={(e) => setNotes(e.target.value)}
       />
-      <button className="p-2 text-white bg-indigo-400 hover:bg-indigo-400/70">
+      <button
+        type="submit"
+        className="p-2 text-white bg-indigo-400 hover:bg-indigo-400/70"
+      >
         Save
       </button>
-    </main>
+    </form>
   );
 };
 
