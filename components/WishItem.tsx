@@ -9,7 +9,10 @@ export const WishItem = (props: WishItem) => {
   const { name, notes, _id } = props;
 
   return (
-    <section className="border rounded-md border-slate-300 justify-between my-2 p-4 flex hover:bg-slate-100 cursor-pointer">
+    <section
+      className="border rounded-md border-slate-300 justify-between my-2 p-4 flex hover:bg-slate-100 cursor-pointer"
+      key={_id}
+    >
       <div>
         <h2 className="font-bold">{name}</h2>
         <div className="text-gray-600">{notes}</div>

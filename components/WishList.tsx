@@ -20,7 +20,7 @@ const WishList = async () => {
   return (
     <main>
       {wishList.map((data: WishItem) => (
-        <WishItem {...data} />
+        <WishItem {...data} key={data._id} />
       ))}
     </main>
   );

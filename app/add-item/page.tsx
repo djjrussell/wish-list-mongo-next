@@ -26,6 +26,7 @@ const AddItemPage = () => {
 
       if (res.ok) {
         router.push("/");
+        router.refresh();
       }
     } catch (e) {
       console.log(e);

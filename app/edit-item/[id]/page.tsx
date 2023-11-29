@@ -2,7 +2,6 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { redirect } from "next/navigation";
 
 const EditItemPage = ({ params }: any) => {
   const [name, setName] = useState("");
@@ -38,6 +37,7 @@ const EditItemPage = ({ params }: any) => {
       });
       if (res.ok) {
         router.push("/");
+        router.refresh();
       }
     } catch (e) {
       console.log(e);
