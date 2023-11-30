@@ -4,7 +4,7 @@ const wantsSchema = new Schema(
     {
         name: String,
         notes: String,
-        level: Number,
+        rating: Number,
     },
     {
         timestamps: true

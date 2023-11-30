@@ -3,6 +3,7 @@
 import LoadingSpinner from "@/components/LoadingSpinner";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { Rating } from "react-simple-star-rating";
 
 const EditItemPage = ({ params }: any) => {
   const [name, setName] = useState("");
