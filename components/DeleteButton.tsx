@@ -18,7 +18,12 @@ const DeleteButton = (props: { id: string }) => {
       console.log(e);
     }
   };
-  return <FaRegTrashAlt onClick={handleDelete} />;
+  return (
+    <FaRegTrashAlt
+      onClick={handleDelete}
+      className="fill-red-300 hover:fill-red-500 hover:scale-150"
+    />
+  );
 };
 
 export default DeleteButton;

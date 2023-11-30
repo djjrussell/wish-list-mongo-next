@@ -10,7 +10,7 @@ export const WishItem = (props: WishItem) => {
 
   return (
     <section
-      className="border rounded-md border-slate-300 justify-between my-2 p-4 flex hover:bg-slate-100 cursor-pointer"
+      className="border rounded-md drop-shadow-lg justify-between my-2 p-4 flex hover:bg-slate-100 cursor-pointer bg-white"
       key={_id}
     >
       <div>
@@ -19,7 +19,7 @@ export const WishItem = (props: WishItem) => {
       </div>
       <div className="justify-between flex gap-2">
         <DeleteButton id={_id} />
-        <Link href={`edit-item/${_id}`}>
+        <Link href={`edit-item/${_id}`} className="hover:scale-150">
           <FaEdit />
         </Link>
       </div>
