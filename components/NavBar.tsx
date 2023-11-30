@@ -2,11 +2,14 @@ import Link from "next/link";
 
 const NavBar = () => {
   return (
-    <nav className="bg-indigo-500 px-8 py-3 flex w-full items-center justify-between">
+    <nav className="bg-indigo-500 px-8 py-3 flex w-full items-center justify-between drop-shadow-lg">
       <Link className="text-white font-extrabold" href="/">
         Wish List
       </Link>
-      <Link className="bg-white p-2 button" href="add-item">
+      <Link
+        className="bg-white hover:bg-indigo-100 text-indigo-900 font-semibold py-2 px-4 border border-indigo-500 hover:border-indigo-700 rounded"
+        href="add-item"
+      >
         Add To Wishlist
       </Link>
     </nav>

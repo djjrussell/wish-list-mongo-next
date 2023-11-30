@@ -1,5 +1,6 @@
 "use client";
 
+import LoadingSpinner from "@/components/LoadingSpinner";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -7,7 +8,7 @@ const EditItemPage = ({ params }: any) => {
   const [name, setName] = useState("");
   const [notes, setNotes] = useState("");
   const [data, setData] = useState(null);
-  const [isLoading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch(`http://localhost:3000/api/wants/${params.id}`)
@@ -20,14 +21,14 @@ const EditItemPage = ({ params }: any) => {
       });
   }, []);
 
-  if (isLoading) return <p>Loading...</p>;
-  if (!data) return <p>No profile data</p>;
+  if (loading) return <LoadingSpinner />;
 
   const router = useRouter();
 
   // need to add star interface
 
   const handleSubmit = async (e: any) => {
+    setLoading(true);
     e.preventDefault();
     try {
       const res = await fetch(`http://localhost:3000/api/wants/${params.id}`, {
@@ -39,7 +40,9 @@ const EditItemPage = ({ params }: any) => {
         router.push("/");
         router.refresh();
       }
+      setLoading(false);
     } catch (e) {
+      setLoading(false);
       console.log(e);
     }
   };
@@ -60,7 +63,7 @@ const EditItemPage = ({ params }: any) => {
       />
       <button
         type="submit"
-        className="p-2 text-white bg-indigo-400 hover:bg-indigo-400/70"
+        className="p-2 text-white bg-indigo-400 hover:bg-indigo-400/70 drop-shadow-lg"
       >
         Save
       </button>

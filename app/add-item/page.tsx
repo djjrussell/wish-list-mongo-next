@@ -1,13 +1,17 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 const AddItemPage = () => {
-  const [name, setName] = useState("");
-  const [notes, setNotes] = useState("");
+  const [name, setName] = useState<string>("");
+  const [notes, setNotes] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
+
   const router = useRouter();
 
   const handleSubmit = async (e: any) => {
+    setLoading(true);
     e.preventDefault();
     if (!name || !notes) {
       alert("enter some information you piece of shit");
@@ -28,10 +32,14 @@ const AddItemPage = () => {
         router.push("/");
         router.refresh();
       }
+      setLoading(false);
     } catch (e) {
+      setLoading(false);
       console.log(e);
     }
   };
+
+  if (loading) return <LoadingSpinner />;
 
   return (
     <form className="flex flex-col gap-4 my-4" onSubmit={handleSubmit}>
@@ -48,7 +56,7 @@ const AddItemPage = () => {
         value={notes}
       />
       <button
-        className="p-2 text-white bg-indigo-400 hover:bg-indigo-400/70"
+        className="p-2 text-white bg-indigo-400 hover:bg-indigo-400/70 drop-shadow-lg"
         type="submit"
       >
         Save
