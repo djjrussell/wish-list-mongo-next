@@ -6,18 +6,22 @@ import { useEffect, useState } from "react";
 import { Rating } from "react-simple-star-rating";
 
 const EditItemPage = ({ params }: any) => {
-  const [name, setName] = useState("");
-  const [notes, setNotes] = useState("");
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [name, setName] = useState<string>("");
+  const [notes, setNotes] = useState<string>("");
+  const [rating, setRating] = useState<number>(0);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  const handleRating = (rate: number) => {
+    setRating(rate);
+  };
 
   useEffect(() => {
     fetch(`http://localhost:3000/api/wants/${params.id}`)
       .then((res) => res.json())
       .then((data) => {
-        setData(data.want);
         setName(data.want.name);
         setNotes(data.want.notes);
+        setRating(data.want.rating);
         setLoading(false);
       });
   }, []);
@@ -26,8 +30,6 @@ const EditItemPage = ({ params }: any) => {
 
   const router = useRouter();
 
-  // need to add star interface
-
   const handleSubmit = async (e: any) => {
     setLoading(true);
     e.preventDefault();
@@ -35,7 +37,7 @@ const EditItemPage = ({ params }: any) => {
       const res = await fetch(`http://localhost:3000/api/wants/${params.id}`, {
         method: "PUT",
         cache: "no-store",
-        body: JSON.stringify({ name, notes }),
+        body: JSON.stringify({ name, notes, rating }),
       });
       if (res.ok) {
         router.push("/");
@@ -62,6 +64,7 @@ const EditItemPage = ({ params }: any) => {
         value={notes}
         onChange={(e) => setNotes(e.target.value)}
       />
+      <Rating initialValue={rating} onClick={handleRating} />
       <button
         type="submit"
         className="p-2 text-white bg-indigo-400 hover:bg-indigo-400/70 drop-shadow-lg"

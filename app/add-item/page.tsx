@@ -2,13 +2,19 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import { Rating } from "react-simple-star-rating";
 
 const AddItemPage = () => {
   const [name, setName] = useState<string>("");
   const [notes, setNotes] = useState<string>("");
+  const [rating, setRating] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(false);
 
   const router = useRouter();
+
+  const handleRating = (rate: number) => {
+    setRating(rate);
+  };
 
   const handleSubmit = async (e: any) => {
     setLoading(true);
@@ -25,6 +31,7 @@ const AddItemPage = () => {
         body: JSON.stringify({
           name,
           notes,
+          rating,
         }),
       });
 
@@ -55,6 +62,7 @@ const AddItemPage = () => {
         onChange={(e) => setNotes(e.target.value)}
         value={notes}
       />
+      <Rating initialValue={rating} onClick={handleRating} />
       <button
         className="p-2 text-white bg-indigo-400 hover:bg-indigo-400/70 drop-shadow-lg"
         type="submit"

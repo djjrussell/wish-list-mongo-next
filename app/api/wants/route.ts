@@ -3,9 +3,9 @@ import Wants from '@/models/Wants'
 import { NextRequest, NextResponse } from "next/server";
 
 export const POST = async (request: NextRequest) => {
-    const { name, notes, level } = await request.json();
+    const { name, notes, rating } = await request.json();
     await connectMongoDb();
-    await Wants.create({name, notes, level})
+    await Wants.create({name, notes, rating})
     return NextResponse.json({message: "Want created"}, {status: 201});
 }
 

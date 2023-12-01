@@ -17,7 +17,7 @@ export const WishItem = (props: WishItem) => {
       <div>
         <h2 className="font-bold">{name}</h2>
         <div className="text-gray-600">{notes}</div>
-        <Rating initialValue={rating} readonly fillColor="lightblue" />
+        <Rating initialValue={rating} readonly fillColor="#9FA8DA" />
       </div>
       <div className="justify-between flex gap-2">
         <DeleteButton id={_id} />
