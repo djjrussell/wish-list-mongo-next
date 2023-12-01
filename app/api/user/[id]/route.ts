@@ -4,13 +4,13 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export const PUT = async (request: NextRequest, { params }: any) => {
     const { id } = params;
-    const { fname, mname, lname, username, email } = await request.json();
+    const { password, username, email } = await request.json();
     await connectMongoDB();
-    await User.findByIdAndUpdate(id, { fname, mname, lname, username, email })
+    await User.findByIdAndUpdate(id, { password, username, email })
     return NextResponse.json({message: "User updated"}, {status: 200});
 }
 
-export const GET = async (request: NextRequest, { params }: any) => {
+export const GET = async (_: NextRequest, { params }: any) => {
     const { id } = params;
     await connectMongoDB();
     const user = await User.findOne({_id: id})

@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    background-color:white;
+}
+
 svg.star-svg {
     display: inline;
     height: 20px;
