@@ -21,7 +21,10 @@ export const WishItem = (props: WishItem) => {
       </div>
       <div className="justify-between flex gap-2">
         <DeleteButton id={_id} />
-        <Link href={`edit-item/${_id}`} className="hover:scale-150">
+        <Link
+          href={`/experiences/authenticated/edit-item/${_id}`}
+          className="hover:scale-150"
+        >
           <FaEdit />
         </Link>
       </div>

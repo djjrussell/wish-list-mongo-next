@@ -5,7 +5,6 @@ import { NextRequest, NextResponse } from 'next/server';
 export const PUT = async (request: NextRequest, { params }: any) => {
     const { id } = params;
     const { name, notes, rating } = await request.json();
-    console.log('----------------->>>>>>>>>>>>>>>>>>>>.RATING', rating)
     await connectMongoDB();
     await Wants.findByIdAndUpdate(id, { name, notes, rating })
     return NextResponse.json({message: "Want updated"}, {status: 200});

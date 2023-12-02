@@ -1,5 +1,5 @@
-import WishList from "@/components/WishList";
+import LoginPage from "./experiences/unauthenticated/login/page";
 
 export default function Home() {
-  return <WishList />;
+  return <LoginPage />;
 }

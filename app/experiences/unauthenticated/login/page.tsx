@@ -34,7 +34,8 @@ const LoginPage = () => {
           </button>
         </form>
         <p className="text-slate-400">
-          Dont have an account? <Link href="/register">Register</Link>
+          Dont have an account?{" "}
+          <Link href="/experiences/unauthenticated/register">Register</Link>
         </p>
       </section>
     </main>

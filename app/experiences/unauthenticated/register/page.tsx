@@ -1,6 +1,7 @@
 "use client";
 import { userExistsByEmail } from "@/libs/helpers/userExistsByEmail";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const RegisterPage = () => {
@@ -8,7 +9,7 @@ const RegisterPage = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
-
+  const router = useRouter();
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     if (password !== confirmPassword) {
@@ -32,6 +33,7 @@ const RegisterPage = () => {
       alert("Success!!!!!");
       const form = e.target;
       form.reset();
+      router.push("/authenticated/experiences/login");
     } else {
       console.log("registration failed");
     }
@@ -74,8 +76,14 @@ const RegisterPage = () => {
             Log in
           </button>
         </form>
-        <p className="text-slate-400">
-          Have an account? <Link href="/login">Log in</Link>
+        <p className="text-slate-600">
+          Have an account?
+          <Link
+            className="ml-1 hover:text-indigo-800"
+            href="/experiences/unauthenticated/login"
+          >
+            Log in
+          </Link>
         </p>
       </section>
     </main>

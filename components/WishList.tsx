@@ -6,9 +6,6 @@ export const getWishList = async () => {
       cache: "no-store",
     });
 
-    if (!res) {
-      console.log(res);
-    }
     return res.json();
   } catch (e) {
     console.log("error loading wish list", e);
