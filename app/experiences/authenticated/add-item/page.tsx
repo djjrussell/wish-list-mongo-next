@@ -36,7 +36,7 @@ const AddItemPage = () => {
       });
 
       if (res.ok) {
-        router.push("/");
+        router.push("/experiences/authenticated/");
         router.refresh();
       }
       setLoading(false);

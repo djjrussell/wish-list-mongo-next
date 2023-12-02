@@ -40,7 +40,7 @@ const EditItemPage = ({ params }: any) => {
         body: JSON.stringify({ name, notes, rating }),
       });
       if (res.ok) {
-        router.push("/");
+        router.push("/experiences/authenticated/");
         router.refresh();
       }
       setLoading(false);

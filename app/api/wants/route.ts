@@ -1,4 +1,4 @@
-import connectMongoDb from "@/libs/mongodb";
+import connectMongoDb from "@/libs/mongo/mongodb";
 import Wants from '@/models/Wants'
 import { NextRequest, NextResponse } from "next/server";
 

@@ -11,7 +11,7 @@ const DeleteButton = (props: { id: string }) => {
         cache: "no-store",
       });
       if (res.ok) {
-        router.push("/");
+        router.push("/experiences/authenticated/");
         router.refresh();
       }
     } catch (e) {

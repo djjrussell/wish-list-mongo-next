@@ -1,4 +1,4 @@
-import connectMongoDB from '@/libs/mongodb';
+import connectMongoDB from '@/libs/mongo/mongodb';
 import User from '@/models/User';
 import { NextRequest, NextResponse } from 'next/server';
 

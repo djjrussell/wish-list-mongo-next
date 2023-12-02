@@ -76,7 +76,7 @@ const RegisterPage = () => {
             Log in
           </button>
         </form>
-        <p className="text-slate-600">
+        <span className="text-slate-600">
           Have an account?
           <Link
             className="ml-1 hover:text-indigo-800"
@@ -84,7 +84,7 @@ const RegisterPage = () => {
           >
             Log in
           </Link>
-        </p>
+        </span>
       </section>
     </main>
   );

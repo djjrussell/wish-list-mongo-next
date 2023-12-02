@@ -33,10 +33,10 @@ const LoginPage = () => {
             Log in
           </button>
         </form>
-        <p className="text-slate-400">
-          Dont have an account?{" "}
+        <span className="text-slate-400">
+          Dont have an account?
           <Link href="/experiences/unauthenticated/register">Register</Link>
-        </p>
+        </span>
       </section>
     </main>
   );
