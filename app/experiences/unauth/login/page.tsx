@@ -2,13 +2,33 @@
 
 import Link from "next/link";
 import React, { useState } from "react";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const LoginPage = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const router = useRouter();
 
-  const handleSubmit = () => {
-    alert(`email: ${email} password: ${password}`);
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    try {
+      const resp = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      });
+
+      if (resp?.error) {
+        alert("invalid credentials");
+        return false;
+      }
+
+      router.push("/experiences/auth/");
+      router.refresh();
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
@@ -35,7 +55,7 @@ const LoginPage = () => {
         </form>
         <span className="text-slate-400">
           Dont have an account?
-          <Link href="/experiences/unauthenticated/register">Register</Link>
+          <Link href="/experiences/unauth/register">Register</Link>
         </span>
       </section>
     </main>

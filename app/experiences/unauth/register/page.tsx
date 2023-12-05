@@ -33,7 +33,7 @@ const RegisterPage = () => {
       alert("Success!!!!!");
       const form = e.target;
       form.reset();
-      router.push("/authenticated/experiences/login");
+      router.push("/auth/experiences/login");
     } else {
       console.log("registration failed");
     }
@@ -80,7 +80,7 @@ const RegisterPage = () => {
           Have an account?
           <Link
             className="ml-1 hover:text-indigo-800"
-            href="/experiences/unauthenticated/login"
+            href="/experiences/unauth/login"
           >
             Log in
           </Link>

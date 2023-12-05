@@ -20,9 +20,9 @@ export const WishItem = (props: WishItem) => {
         <Rating initialValue={rating} readonly fillColor="#9FA8DA" />
       </div>
       <div className="justify-between flex gap-2">
-        <DeleteButton id={_id} />
+        <DeleteButton id={_id} name={name} />
         <Link
-          href={`/experiences/authenticated/edit-item/${_id}`}
+          href={`/experiences/auth/edit-item/${_id}`}
           className="hover:scale-150"
         >
           <FaEdit />
