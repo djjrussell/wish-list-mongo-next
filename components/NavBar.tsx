@@ -1,8 +1,11 @@
 import Link from "next/link";
-import { signOut } from "next-auth/react";
 import LogOutButton from "./LogOutButton";
+import { useSession } from "next-auth/react";
 
 const NavBar = () => {
+  //  use this in client component to display name and profile info
+  // const { data: session } = useSession();
+  // console.log("------------->>>>>>>>>>>>", session);
   return (
     <nav className="bg-indigo-500 px-8 py-3 flex w-full items-center justify-between drop-shadow-lg rounded ">
       <Link
