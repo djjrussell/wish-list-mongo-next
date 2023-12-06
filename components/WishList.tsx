@@ -1,6 +1,7 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 import { WishItem } from "./WishItem";
+import ZeroLengthListAlert from "./ZeroLengthListAlert";
 
 export const getWishList = async () => {
   const session: SessionUser | null = await getServerSession(
@@ -22,6 +23,11 @@ export const getWishList = async () => {
 
 const WishList = async () => {
   const wishList: WishItem[] = await getWishList();
+
+  if (wishList.length === 0) {
+    return <ZeroLengthListAlert />;
+  }
+
   return (
     <main>
       {wishList.map((data: WishItem) => (

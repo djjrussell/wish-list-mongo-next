@@ -4,6 +4,7 @@ import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import Logo from "./Logo";
 
 export const LoginForm = () => {
   const [email, setEmail] = useState<string>("");
@@ -32,7 +33,8 @@ export const LoginForm = () => {
   };
 
   return (
-    <main className="h-screen flex items-center justify-center">
+    <main className="h-screen flex items-center justify-center flex-col">
+      <Logo />
       <section className="border-indigo-400 rounded-md p-8 bg-indigo-300 box-shadow-lg">
         <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
           <input
@@ -47,16 +49,22 @@ export const LoginForm = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
           <button
-            className="p-2 text-white bg-indigo-400 hover:bg-indigo-400/70 drop-shadow-lg"
+            className="p-2 text-white bg-indigo-400 hover:bg-indigo-400/70 drop-shadow-lg rounded-3xl"
             type="submit"
           >
             Log in
           </button>
         </form>
-        <span className="text-slate-400">
+        <span className="text-slate-500"></span>
+        <div className="text-slate-600 mt-2">
           Dont have an account?
-          <Link href="/experiences/unauth/register">Register</Link>
-        </span>
+          <Link
+            href="/experiences/unauth/register"
+            className="ml-1 hover:text-indigo-800"
+          >
+            Register
+          </Link>
+        </div>
       </section>
     </main>
   );
