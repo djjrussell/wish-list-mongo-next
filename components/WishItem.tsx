@@ -1,18 +1,23 @@
 "use client";
 
-import Link from "next/link";
-import React from "react";
-import { FaEdit } from "react-icons/fa";
 import DeleteButton from "./DeleteButton";
 import { Rating } from "react-simple-star-rating";
+import { useRouter } from "next/navigation";
 
 export const WishItem = (props: WishItem) => {
   const { name, notes, _id, rating } = props;
 
+  const router = useRouter();
+
+  const handleClick = () => {
+    return router.push(`/experiences/auth/edit-item/${_id}`);
+  };
+
   return (
     <section
-      className="border rounded-md drop-shadow-lg justify-between my-2 p-4 flex cursor-pointer bg-white hover:scale-105"
+      className="border rounded-3xl drop-shadow-lg justify-between my-2 p-4 flex cursor-pointer bg-white hover:scale-105"
       key={_id}
+      onClick={() => handleClick()}
     >
       <div>
         <h2 className="font-bold">{name}</h2>
@@ -21,12 +26,6 @@ export const WishItem = (props: WishItem) => {
       </div>
       <div className="justify-between flex gap-2">
         <DeleteButton id={_id} name={name} />
-        <Link
-          href={`/experiences/auth/edit-item/${_id}`}
-          className="hover:scale-150"
-        >
-          <FaEdit />
-        </Link>
       </div>
     </section>
   );
