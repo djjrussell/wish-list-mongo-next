@@ -1,6 +1,7 @@
 "use client";
 
 import LoadingSpinner from "@/components/LoadingSpinner";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Rating } from "react-simple-star-rating";
@@ -10,6 +11,9 @@ const EditItemPage = ({ params }: any) => {
   const [notes, setNotes] = useState<string>("");
   const [rating, setRating] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
+
+  const { data: session } = useSession();
+  const user: User = session?.user as any;
 
   const handleRating = (rate: number) => {
     setRating(rate);
@@ -37,7 +41,7 @@ const EditItemPage = ({ params }: any) => {
       const res = await fetch(`http://localhost:3000/api/wants/${params.id}`, {
         method: "PUT",
         cache: "no-store",
-        body: JSON.stringify({ name, notes, rating }),
+        body: JSON.stringify({ name, notes, rating, userId: user.id }),
       });
       if (res.ok) {
         router.push("/experiences/auth/");
@@ -64,7 +68,7 @@ const EditItemPage = ({ params }: any) => {
         value={notes}
         onChange={(e) => setNotes(e.target.value)}
       />
-      <Rating initialValue={rating} onClick={handleRating} />
+      <Rating initialValue={rating} onClick={(e) => handleRating(e)} />
       <button
         type="submit"
         className="p-2 text-white bg-indigo-400 hover:bg-indigo-400/70 drop-shadow-lg"

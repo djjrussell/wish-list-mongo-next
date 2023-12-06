@@ -31,10 +31,9 @@ export const RegisterForm = () => {
     });
 
     if (resp.ok) {
-      alert("Success!!!!!");
       const form = e.target;
       form.reset();
-      router.push("/auth/experiences/login");
+      router.push("/experiences/auth/login");
     } else {
       console.log("registration failed");
     }

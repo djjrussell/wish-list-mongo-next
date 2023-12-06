@@ -1,13 +1,12 @@
 import Link from "next/link";
 import LogOutButton from "./LogOutButton";
-import { useSession } from "next-auth/react";
 
 const NavBar = () => {
   return (
     <nav className="bg-indigo-500 px-8 py-3 flex w-full justify-between drop-shadow-lg rounded ">
       <Link
         className="text-white font-bold cursor-pointer text-xl"
-        href="/auth/experiences/"
+        href="/experiences/auth/"
       >
         Bish List
       </Link>

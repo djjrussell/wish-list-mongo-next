@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import { Rating } from "react-simple-star-rating";
+import { useSession } from "next-auth/react";
 
 const AddItemPage = () => {
   const [name, setName] = useState<string>("");
@@ -11,6 +12,8 @@ const AddItemPage = () => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const router = useRouter();
+  const { data: session } = useSession();
+  const user: User = session?.user as any;
 
   const handleRating = (rate: number) => {
     setRating(rate);
@@ -32,6 +35,7 @@ const AddItemPage = () => {
           name,
           notes,
           rating,
+          userId: user.id,
         }),
       });
 

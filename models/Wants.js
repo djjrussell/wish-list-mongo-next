@@ -5,6 +5,7 @@ const wantsSchema = new Schema(
         name: String,
         notes: String,
         rating: Number,
+        userId: String
     },
     {
         timestamps: true
