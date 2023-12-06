@@ -34,6 +34,27 @@ export const authOptions = {
     session: {
         strategy: "jwt"
     },
+    callbacks:{
+    jwt: async ({ token, user }) =>{
+
+      if (user) {
+        token.user = user;
+      }
+
+      return token
+    },
+    session: async ({ session, token }) => {
+        // HERE is where we are adding user data to the session
+        session.user = {
+            username: token.user.username,
+            email: token.user.email,
+            id: token.user._id    
+        }
+        
+        return session;
+        
+        },
+    },
     secret: process.env.NEXTAUTH_SECRET,
     pages: {
         signIn: "/experiences/unauth/login"

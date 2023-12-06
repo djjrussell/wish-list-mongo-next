@@ -1,10 +1,18 @@
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { getServerSession } from "next-auth";
 import { WishItem } from "./WishItem";
 
 export const getWishList = async () => {
+  const session: SessionUser | null = await getServerSession(
+    authOptions as any
+  );
   try {
-    const res = await fetch("http://localhost:3000/api/wants", {
-      cache: "no-store",
-    });
+    const res = await fetch(
+      `http://localhost:3000/api/wants?userId=${session?.user.id}`,
+      {
+        cache: "no-store",
+      }
+    );
 
     return res.json();
   } catch (e) {
