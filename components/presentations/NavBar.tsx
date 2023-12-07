@@ -1,5 +1,5 @@
 import Link from "next/link";
-import LogOutButton from "./LogOutButton";
+import LogOutButton from "../buttons/LogOutButton";
 import { BsFillPlusCircleFill } from "react-icons/bs";
 
 const NavBar = () => {

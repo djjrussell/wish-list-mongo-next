@@ -1,4 +1,4 @@
-import AddItemForm from "@/components/AddITemForm";
+import AddItemForm from "@/components/forms/AddItemForm";
 
 const AddItemPage = () => {
   return <AddItemForm />;

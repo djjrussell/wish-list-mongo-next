@@ -4,7 +4,7 @@ import { userExistsByEmail } from "@/libs/helpers/userExistsByEmail";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import Logo from "./Logo";
+import Logo from "../presentations/Logo";
 
 export const RegisterForm = () => {
   const [email, setEmail] = useState<string>("");

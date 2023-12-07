@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { Rating } from "react-simple-star-rating";
-import LoadingSpinner from "./LoadingSpinner";
+import LoadingSpinner from "../presentations/LoadingSpinner";
 
 const EditItemForm = ({ params }: any) => {
   const [name, setName] = useState<string>("");

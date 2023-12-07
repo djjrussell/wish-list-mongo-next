@@ -1,4 +1,4 @@
-import EditItemForm from "@/components/EditItemForm";
+import EditItemForm from "@/components/forms/EditItemForm";
 
 const EditItemPage = ({ params }: any) => {
   return <EditItemForm params={params} />;
