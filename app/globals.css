@@ -4,6 +4,11 @@
 
 body {
     background-color:#eef2ff;
+    background-image: url('../public/assets/grey-background.jpg');
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 svg.star-svg {

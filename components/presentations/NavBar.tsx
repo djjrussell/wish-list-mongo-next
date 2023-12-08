@@ -1,6 +1,7 @@
 import Link from "next/link";
 import LogOutButton from "../buttons/LogOutButton";
 import { BsFillPlusCircleFill } from "react-icons/bs";
+import ProfileSection from "./ProfileSection";
 
 const NavBar = () => {
   return (
@@ -13,7 +14,7 @@ const NavBar = () => {
       <Link href="/experiences/auth/add-item" className="hover:scale-105">
         <BsFillPlusCircleFill fill="white" size="50" />
       </Link>
-      <LogOutButton />
+      <ProfileSection />
     </nav>
   );
 };

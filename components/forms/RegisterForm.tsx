@@ -5,26 +5,46 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Logo from "../presentations/Logo";
+import { Snackbar, Alert } from "@mui/material";
+import { isValidEmail } from "@/libs/helpers/isValidEmail";
 
 export const RegisterForm = () => {
   const [email, setEmail] = useState<string>("");
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [snackOpen, setSnackOpen] = useState<boolean>(false);
+
   const router = useRouter();
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
-      alert("Passwords do not match");
+
+    if (!password || !confirmPassword || !email || !username) {
+      setErrorMessage("please enter all required fields");
+      setSnackOpen(true);
       return false;
     }
+
+    if (password !== confirmPassword) {
+      setErrorMessage("passwords do not match");
+      setSnackOpen(true);
+      return false;
+    }
+
     const userExists = await userExistsByEmail(email);
 
     if (userExists === true) {
-      alert("user already exists");
+      setErrorMessage("user already exists");
+      setSnackOpen(true);
       return false;
     }
 
+    if (!isValidEmail(email)) {
+      setErrorMessage("please enter a valid email address");
+      setSnackOpen(true);
+      return false;
+    }
     const resp = await fetch("/api/register", {
       method: "POST",
       cache: "no-store",
@@ -36,11 +56,10 @@ export const RegisterForm = () => {
       form.reset();
       router.push("/experiences/unauth/login");
     } else {
-      console.log("registration failed");
+      setErrorMessage("registration failed");
+      setSnackOpen(true);
+      console.log("");
     }
-    alert(
-      `email: ${email} password: ${password} confirmPassword: ${confirmPassword} username: ${username}`
-    );
   };
 
   return (
@@ -88,6 +107,20 @@ export const RegisterForm = () => {
           </Link>
         </div>
       </section>
+      <Snackbar
+        sx={{ height: "50%" }}
+        open={snackOpen}
+        autoHideDuration={6000}
+        onClose={() => setSnackOpen(false)}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "center",
+        }}
+      >
+        <Alert onClose={() => setSnackOpen(false)} severity="error">
+          {errorMessage}
+        </Alert>
+      </Snackbar>
     </main>
   );
 };

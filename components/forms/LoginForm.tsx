@@ -5,11 +5,19 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import Logo from "../presentations/Logo";
+import { Alert, Snackbar } from "@mui/material";
 
 export const LoginForm = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [snackOpen, setSnackOpen] = useState<boolean>(false);
   const router = useRouter();
+
+  const showError = () => {
+    setErrorMessage("there was a problem signing you in");
+    setSnackOpen(true);
+  };
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -21,14 +29,14 @@ export const LoginForm = () => {
       });
 
       if (resp?.error) {
-        alert("invalid credentials");
-        return false;
+        showError();
       }
 
       router.push("/experiences/auth/");
       router.refresh();
     } catch (e) {
       console.log(e);
+      showError();
     }
   };
 
@@ -66,6 +74,20 @@ export const LoginForm = () => {
           </Link>
         </div>
       </section>
+      <Snackbar
+        sx={{ height: "50%" }}
+        open={snackOpen}
+        autoHideDuration={6000}
+        onClose={() => setSnackOpen(false)}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "center",
+        }}
+      >
+        <Alert onClose={() => setSnackOpen(false)} severity="error">
+          {errorMessage}
+        </Alert>
+      </Snackbar>
     </main>
   );
 };

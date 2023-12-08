@@ -5,11 +5,11 @@ import { IoLogOutOutline } from "react-icons/io5";
 
 export const LogOutButton = () => {
   return (
-    <button onClick={() => signOut()}>
-      <IoLogOutOutline
-        size={100}
-        className="text-white font-bold h-9 hover:h-10"
-      />
+    <button
+      onClick={() => signOut()}
+      className="text-white text-sm	hover:scale-105"
+    >
+      Log out
     </button>
   );
 };
