@@ -23,7 +23,7 @@ const AddItemForm = () => {
   const handleSubmit = async (e: any) => {
     setLoading(true);
     e.preventDefault();
-    if (!name || !notes) {
+    if (!name || !notes || !rating) {
       alert("enter some information you piece of shit");
       return;
     }
