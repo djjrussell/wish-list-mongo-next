@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="max-w-3xl mx-auto p-4 bg-slate-100 h-screen">
+        <div className="max-w-3xl mx-auto p-4 bg-indigo-200 h-screen">
           <AuthProvider>{children}</AuthProvider>
         </div>
       </body>
