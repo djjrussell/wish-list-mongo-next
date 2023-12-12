@@ -17,7 +17,7 @@ export const RegisterForm = () => {
   const [snackOpen, setSnackOpen] = useState<boolean>(false);
 
   const router = useRouter();
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
 
     if (!password || !confirmPassword || !email || !username) {
