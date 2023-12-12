@@ -2,7 +2,7 @@ import connectMongoDb from "@/libs/mongo/mongodb";
 import User from '@/models/User'
 import { NextRequest, NextResponse } from "next/server";
 
-export const POST = async (request: any) => {
+export const POST = async (request: NextRequest) => {
     const { fname, mname, lname, username, email } = await request.json();
     await connectMongoDb();
     await User.create({ fname, mname, lname, username, email })

@@ -20,7 +20,7 @@ const AddItemForm = () => {
     setRating(rate);
   };
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     setLoading(true);
     e.preventDefault();
     if (!name || !notes || !rating) {

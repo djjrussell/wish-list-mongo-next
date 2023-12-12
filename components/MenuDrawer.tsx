@@ -1,5 +1,3 @@
-"use client";
-
 import {
   Drawer,
   List,
@@ -9,34 +7,37 @@ import {
   ListItemText,
 } from "@mui/material";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import React from "react";
 import { IoPerson } from "react-icons/io5";
 import { MdGroups } from "react-icons/md";
 
 export const MenuDrawer = ({ menuOpen, setMenuOpen }: any) => {
+  const pathname = usePathname();
+
+  const routes = [
+    { href: "/experiences/auth", name: "My List", icon: <IoPerson /> },
+    { href: "/experiences/auth/group", name: "Group List", icon: <MdGroups /> },
+  ];
+
   return (
     <Drawer anchor="left" open={menuOpen} onClose={() => setMenuOpen(false)}>
       <List>
-        <ListItem disablePadding>
-          <Link href="/experiences/auth/">
-            <ListItemButton>
-              <ListItemIcon>
-                <IoPerson />
-              </ListItemIcon>
-              <ListItemText>My List</ListItemText>
-            </ListItemButton>
-          </Link>
-        </ListItem>
-        <ListItem disablePadding>
-          <Link href="/experiences/auth/group">
-            <ListItemButton>
-              <ListItemIcon>
-                <MdGroups />
-              </ListItemIcon>
-              <ListItemText>My Group</ListItemText>
-            </ListItemButton>
-          </Link>
-        </ListItem>
+        {routes.map((route) => (
+          <ListItem disablePadding>
+            <Link
+              href={route.href}
+              className={
+                route.href === pathname ? "bg-indigo-500 text-white" : ""
+              }
+            >
+              <ListItemButton>
+                <ListItemIcon>{route.icon}</ListItemIcon>
+                <ListItemText>{route.name}</ListItemText>
+              </ListItemButton>
+            </Link>
+          </ListItem>
+        ))}
       </List>
     </Drawer>
   );

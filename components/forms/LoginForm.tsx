@@ -19,7 +19,7 @@ export const LoginForm = () => {
     setSnackOpen(true);
   };
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       const resp = await signIn("credentials", {
