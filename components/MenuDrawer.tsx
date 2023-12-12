@@ -9,33 +9,33 @@ import {
   ListItemText,
 } from "@mui/material";
 import Link from "next/link";
-import React, { useState } from "react";
+import React from "react";
 import { IoPerson } from "react-icons/io5";
 import { MdGroups } from "react-icons/md";
 
 export const MenuDrawer = ({ menuOpen, setMenuOpen }: any) => {
   return (
     <Drawer anchor="left" open={menuOpen} onClose={() => setMenuOpen(false)}>
-      <List className="bg-slate-100">
+      <List>
         <ListItem disablePadding>
-          <ListItemButton>
-            <ListItemIcon>
-              <IoPerson />
-            </ListItemIcon>
-            <ListItemText>
-              <Link href="/experiences/auth/">My List</Link>
-            </ListItemText>
-          </ListItemButton>
+          <Link href="/experiences/auth/">
+            <ListItemButton>
+              <ListItemIcon>
+                <IoPerson />
+              </ListItemIcon>
+              <ListItemText>My List</ListItemText>
+            </ListItemButton>
+          </Link>
         </ListItem>
         <ListItem disablePadding>
-          <ListItemButton>
-            <ListItemIcon>
-              <MdGroups />
-            </ListItemIcon>
-            <ListItemText>
-              <Link href="/experiences/auth/group">My Group</Link>
-            </ListItemText>
-          </ListItemButton>
+          <Link href="/experiences/auth/group">
+            <ListItemButton>
+              <ListItemIcon>
+                <MdGroups />
+              </ListItemIcon>
+              <ListItemText>My Group</ListItemText>
+            </ListItemButton>
+          </Link>
         </ListItem>
       </List>
     </Drawer>

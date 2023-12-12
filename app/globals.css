@@ -16,3 +16,8 @@ svg.star-svg {
     height: 20px;
     width: 20px;
 }
+
+.MuiDrawer-paperAnchorLeft {
+    background-color: #c5cae9
+;
+}

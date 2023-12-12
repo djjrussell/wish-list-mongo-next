@@ -1,8 +1,8 @@
 import connectMongoDb from "@/libs/mongo/mongodb";
 import User from '@/models/User'
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export const GET = async () => {
+export const GET = async (req: NextRequest) => {
     await connectMongoDb();
     const wants = await User.aggregate([
         {
