@@ -5,7 +5,7 @@ const wantsSchema = new Schema(
         name: String,
         notes: String,
         rating: Number,
-        userId: String
+        userId: mongoose.Schema.Types.ObjectId
     },
     {
         timestamps: true

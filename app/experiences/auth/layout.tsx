@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import "../../globals.css";
-import NavBar from "@/components/presentations/NavBar";
+import Nav from "@/components/presentations/Nav";
 import styles from "./auth.module.css";
 import Footer from "@/components/presentations/Footer";
+import MenuDrawer from "@/components/MenuDrawer";
 
 export const metadata: Metadata = {
   title: "BishList",
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className={styles.main}>
-      <NavBar />
+      <Nav />
       {children}
       <Footer />
     </div>
