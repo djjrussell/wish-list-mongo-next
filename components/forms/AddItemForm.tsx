@@ -5,20 +5,17 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Rating } from "react-simple-star-rating";
 import LoadingSpinner from "../presentations/LoadingSpinner";
+import BishlistRating from "../presentations/BishlistRating";
 
 const AddItemForm = () => {
   const [name, setName] = useState<string>("");
   const [notes, setNotes] = useState<string>("");
-  const [rating, setRating] = useState<number>(0);
+  const [rating, setRating] = useState<number | null>(0);
   const [loading, setLoading] = useState<boolean>(false);
 
   const router = useRouter();
   const { data: session } = useSession();
   const user: User = session?.user as any;
-
-  const handleRating = (rate: number) => {
-    setRating(rate);
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     setLoading(true);
@@ -66,7 +63,13 @@ const AddItemForm = () => {
         onChange={(e) => setNotes(e.target.value)}
         value={notes}
       />
-      <Rating initialValue={rating} onClick={handleRating} />
+      <div className="p-4">
+        <BishlistRating
+          value={rating as number}
+          precision={1}
+          onChange={(e, newValue) => setRating(newValue)}
+        />
+      </div>
       <button
         className="p-2 text-white bg-indigo-500 hover:bg-indigo-500/70 drop-shadow-lg rounded-2xl"
         type="submit"

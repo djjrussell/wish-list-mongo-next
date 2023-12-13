@@ -1,4 +1,4 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import UserExpandableCard from "@/components/presentations/UserExpandableCard";
 import { getServerSession } from "next-auth";
 

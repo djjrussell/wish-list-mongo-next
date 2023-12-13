@@ -3,21 +3,19 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { Rating } from "react-simple-star-rating";
 import LoadingSpinner from "../presentations/LoadingSpinner";
+import BishlistRating from "../presentations/BishlistRating";
+import { Rating } from "@mui/material";
 
 const EditItemForm = ({ params }: any) => {
   const [name, setName] = useState<string>("");
   const [notes, setNotes] = useState<string>("");
   const [rating, setRating] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
-
   const { data: session } = useSession();
-  const user: User = session?.user as any;
+  const router = useRouter();
 
-  const handleRating = (rate: number) => {
-    setRating(rate);
-  };
+  const user: User = session?.user as any;
 
   useEffect(() => {
     fetch(`http://localhost:3000/api/wants/${params.id}`)
@@ -28,11 +26,9 @@ const EditItemForm = ({ params }: any) => {
         setRating(data.want.rating);
         setLoading(false);
       });
-  }, []);
+  }, [params.id]);
 
   if (loading) return <LoadingSpinner />;
-
-  const router = useRouter();
 
   const handleSubmit = async (e: any) => {
     setLoading(true);
@@ -43,6 +39,7 @@ const EditItemForm = ({ params }: any) => {
         cache: "no-store",
         body: JSON.stringify({ name, notes, rating, userId: user.id }),
       });
+
       if (res.ok) {
         router.push("/experiences/auth/");
         router.refresh();
@@ -67,7 +64,15 @@ const EditItemForm = ({ params }: any) => {
         value={notes}
         onChange={(e) => setNotes(e.target.value)}
       />
-      <Rating initialValue={rating} onClick={(e) => handleRating(e)} />
+      <div className="p-4">
+        <BishlistRating
+          value={rating}
+          onChange={(e, newValue) => {
+            setRating(newValue as number);
+          }}
+          precision={1}
+        />
+      </div>
       <button
         type="submit"
         className="p-2 text-white bg-indigo-500 hover:bg-indigo-500/70 drop-shadow-lg rounded-2xl"

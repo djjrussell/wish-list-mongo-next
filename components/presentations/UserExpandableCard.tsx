@@ -5,10 +5,12 @@ import {
   AccordionSummary,
   List,
   ListItem,
+  Rating,
   Typography,
+  styled,
 } from "@mui/material";
 import { MdExpandMore } from "react-icons/md";
-import { Rating } from "react-simple-star-rating";
+import BishlistRating from "./BishlistRating";
 
 type UserExpandableCardProps = {
   username: string;
@@ -44,11 +46,7 @@ export const UserExpandableCard = ({
                     <h2 className="font-extrabold">{want.name}</h2>
                     <p className="ml-2">{want.notes}</p>
                     <div>
-                      <Rating
-                        initialValue={want.rating}
-                        readonly
-                        fillColor="#9FA8DA"
-                      />
+                      <BishlistRating value={want.rating} readOnly />
                     </div>
                   </ListItem>
                 </>
